@@ -1,36 +1,23 @@
 import numpy as np
+import matplotlib.pyplot as plt
+
+data = np.array([
+    [2, 0, 10],
+    [2, 3, 13],
+    [2, 6, 10],
+    [2, 3, 7],
+    [7, 3, 13],
+    [7, 6, 10],
+    [7, 3, 7],
+])
+
+phi = np.array([[20, 0], [0, 18]])
 
 
-def get_xy_points(coords_uvw, df):
-    u, v, w = coords_uvw
-    fx, fy = df
-
-    param_df = np.array([[fx, 0], [0, fy]])
-    x, y = 1/w * param_df.dot([u, v])
-
-    return tuple((round(x, 2), round(y, 2)))
-
-
-coords = []
-coords.append(get_xy_points((2, 0, 10), (20, 18)))
-coords.append(get_xy_points((2, 3, 13), (20, 18)))
-coords.append(get_xy_points((2, 6, 10), (20, 18)))
-coords.append(get_xy_points((2, 3, 7), (20, 18)))
-coords.append(get_xy_points((7, 0, 10), (20, 18)))
-coords.append(get_xy_points((7, 3, 13), (20, 18)))
-coords.append(get_xy_points((7, 6, 10), (20, 18)))
-coords.append(get_xy_points((7, 3, 7), (20, 18)))
-
-coords2 = []
-coords2.append(get_xy_points((2, 1, 9), (20, 18)))
-coords2.append(get_xy_points((2, 3, 11), (20, 18)))
-coords2.append(get_xy_points((2, 5, 9), (20, 18)))
-coords2.append(get_xy_points((2, 3, 7), (20, 18)))
-
-coords2.append(get_xy_points((5, 1, 9), (20, 18)))
-coords2.append(get_xy_points((5, 3, 11), (20, 18)))
-coords2.append(get_xy_points((5, 5, 9), (20, 18)))
-coords2.append(get_xy_points((5, 3, 7), (20, 18)))
-
-
-print(coords2)
+def get_xy(data, focal_distance):
+    new_points = []
+    for coord in data:
+        u, v, w = coord
+        point = 1/w * np.dot(focal_distance, np.array([u, v]).T)
+        new_points.append(point)
+    return new_points
