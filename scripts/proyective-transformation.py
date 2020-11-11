@@ -8,9 +8,9 @@ origin = np.array([
 ])
 
 dest = np.array([
-    [200, 0],
-    [500, 100],
-    [400, 400],
+    [100, 0],
+    [250, 50],
+    [300, 300],
     [0, 200],
 ])
 
@@ -45,6 +45,8 @@ def map_point(point, phi):
 
     lx, ly, l = phi.dot(origin)
 
+    # print(phi.dot(origin))
+
     x = lx/l
     y = ly/l
 
@@ -53,10 +55,14 @@ def map_point(point, phi):
 
 A = getA(origin, dest)
 
+# print(A)
+
 phi = resolve_svd(A)
 
-p1 = [200, 120]
-p2 = [300, 400]
+# print(phi)
+
+p1 = [300, 0]
+# p2 = [300, 400]
 
 print(p1, "-> ", map_point(p1, phi))
-print(p2, "-> ", map_point(p2, phi))
+# print(p2, "-> ", map_point(p2, phi))
