@@ -54,7 +54,7 @@ dest = np.array([
     [0, 200],
 ])
 
-logo = np.load('../datasets/logoUPS.npy')
+logo = np.load('../../datasets/logoUPS.npy')
 
 A = get_a(origin, dest)
 phi = resolve_svd(A)
