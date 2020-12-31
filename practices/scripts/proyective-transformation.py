@@ -32,7 +32,7 @@ def map_point(point, phi_mtx):
 
     lx, ly, l = phi_mtx.dot(o)
 
-    # print(phi.dot(origin))
+    # print(l)
 
     x = int(lx / l)
     y = int(ly / l)
@@ -54,30 +54,38 @@ dest = np.array([
     [0, 200],
 ])
 
-logo = np.load('../../datasets/logoUPS.npy')
+phi = np.array([
+    [-0.8, -0.1, -0.5],
+    [0.2, -0.4, 0.3],
+    [-0.7, 0.5, 0.1]
+])
 
-A = get_a(origin, dest)
-phi = resolve_svd(A)
+print(map_point([267, 428], phi))
 
-y, x = logo.shape
-new_dim = [x, y]
-logo2 = np.zeros(map_point(new_dim, phi))
-
-for i in range(x):
-    for j in range(y):
-        px, py = map_point([i, j], phi)
-        px = int(np.round(px))
-        py = int(np.round(py))
-        logo2[py, px] = logo[j, i]
-
-
-plt.figure()
-plt.subplot(1, 2, 1)
-plt.imshow(logo)
-plt.subplot(1, 2, 2)
-plt.imshow(logo2)
-# plt.scatter(dest[0, 0], dest[0, 1])
-# plt.scatter(dest[1, 0], dest[1, 1])
-# plt.scatter(dest[2, 0], dest[2, 1])
-# plt.scatter(dest[3, 0], dest[3, 1])
-plt.show()
+# logo = np.load('../../datasets/logoUPS.npy')
+#
+# A = get_a(origin, dest)
+# phi = resolve_svd(A)
+#
+# y, x = logo.shape
+# new_dim = [x, y]
+# logo2 = np.zeros(map_point(new_dim, phi))
+#
+# for i in range(x):
+#     for j in range(y):
+#         px, py = map_point([i, j], phi)
+#         px = int(np.round(px))
+#         py = int(np.round(py))
+#         logo2[py, px] = logo[j, i]
+#
+#
+# plt.figure()
+# plt.subplot(1, 2, 1)
+# plt.imshow(logo)
+# plt.subplot(1, 2, 2)
+# plt.imshow(logo2)
+# # plt.scatter(dest[0, 0], dest[0, 1])
+# # plt.scatter(dest[1, 0], dest[1, 1])
+# # plt.scatter(dest[2, 0], dest[2, 1])
+# # plt.scatter(dest[3, 0], dest[3, 1])
+# plt.show()

@@ -101,24 +101,27 @@ def miOtsu(P):
 #     [255, 255, 204, 153, 51, 0],
 # ])
 #
-# _P = np.array([
-#     [150, 210, 210, 210, 150],
-#     [50, 0, 50, 180, 255],
-#     [190, 0, 180, 190, 180],
-#     [150, 210, 190, 180, 150],
-# ])
-#
-# _phi = 180
-#
-# _hist = get_histogram(_P)
-#
-# _hist_blk, _mean_black = get_mean(_hist, _phi, 0)
-# _hist_wh, _mean_white = get_mean(_hist, _phi, 1)
-#
-# _var_black = get_variance(_hist_blk, _mean_black)
-# _var_white = get_variance(_hist_wh, _mean_white)
-#
-# _w_blk = get_weight(_hist_blk, _P.shape)
-# _w_wh = get_weight(_hist_wh, _P.shape)
+_P = np.array([
+    [100,210,210,50,0,0,0,210,210],
+    [0,50,0,210,1,0,1,1,0],
+    [50,50,50,210,1,180,180,180,0],
+    [0,50,0,1,210,0,0,0,0],
+    [0,1,1,0,0,0,0,1,1]
+])
 
-# ic_var = _w_blk * _var_black + _w_wh * _var_white
+_phi = 110
+
+_hist = get_histogram(_P)
+
+_hist_blk, _mean_black = get_mean(_hist, _phi, 0)
+_hist_wh, _mean_white = get_mean(_hist, _phi, 1)
+
+_var_black = get_variance(_hist_blk, _mean_black)
+_var_white = get_variance(_hist_wh, _mean_white)
+
+_w_blk = get_weight(_hist_blk, _P.shape)
+_w_wh = get_weight(_hist_wh, _P.shape)
+
+ic_var = _w_blk * _var_black + _w_wh * _var_white
+
+print(_w_wh)
