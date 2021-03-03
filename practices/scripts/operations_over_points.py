@@ -13,29 +13,6 @@ def miHPA(P):
     k = h.cumsum() / pxls
     return k
 
-## Incompleto
-def convulate(P, F):
-    X = np.empty(P.shape)
-    F_inv = np.flip(F)
-    fi = math.floor(F.shape[0] / 2) # Center of array index
-    size = F.shape[0] - fi - 1
-
-    for i in range(P.shape[0] - 1):
-        for j in range(P.shape[1] - 1):
-
-            ## DO Sumatory
-            zum = 0
-            for m in range(-size, size+1):
-                for n in range(-size, size+1):
-                    print(P[i - m, j - n])
-                    print(P[i, j])
-                    zum += P[i - m, j - n] * F[fi + m, fi + n]
-
-            break
-            X[i, j] = zum
-        break
-    return X
-
 
 def equalize(P):
     Q = np.empty(P.shape)
@@ -78,22 +55,3 @@ def whiten(P):
             Q[a, b] = (P[a, b] - P.mean()) / P.std()
 
     return Q
-
-
-__P = np.array([
-    [6, 4, 0],
-    [7, 0, 3],
-    [9, 7, 0],
-    [0, 1, 0]
-])
-
-__F = np.array([
-    [1, 0, -1],
-    [2, 0, -2],
-    [0, 3, 0]
-])
-
-print(convulate(__P, __F))
-
-
-
